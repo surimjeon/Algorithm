@@ -1,12 +1,17 @@
 H,M=map(int, input().split())
 if H != 0:
-    if 45<=M: #분이 70,80분으로 넘어갈 수도 있음..
-        print(H,M -45)
-    else:  
-        print(H-1,M + 15)
-if H==0:
-    if M>=45:        
-        print(H,M -45)
+    if M>=45:
+        M2 = M -45 #M은 M-45의 값이 들어옴
+        print(H,M2)
     else:
-        H = 23
-        print(H,M + 15)
+        H2 = H-1
+        M2 = M + 15   
+        print(H2,M2)
+if  H == 0:
+    if M>=45:        
+        M2 = M -45 
+        print(H,M2)
+    else:
+        H2 = 23
+        M2 = M + 15
+        print(H2,M2)
