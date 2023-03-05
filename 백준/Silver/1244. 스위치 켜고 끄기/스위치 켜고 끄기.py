@@ -1,32 +1,31 @@
 def change(num):
-    if switch[num] == 0:
-        switch[num] = 1
+    if switch[num]==1:
+        switch[num]=0
     else:
-        switch[num] = 0
-    return
+        switch[num]=1
 
 
-N = int(input())
-switch = [-1] + list(map(int, input().split()))
-students = int(input())
-for _ in range(students):
-    sex, num = map(int, input().split())
-    # 남자
-    if sex == 1:
-        for i in range(num, N+1, num):
+n=int(input()) #스위치 개수
+switch=[-1]+list(map(int,input().split())) #인덱스가 번호인데(1부터시작함)
+m=int(input()) #학생 수
+
+for _ in range(m):
+    sex,num=map(int,input().split())
+    if sex==1:
+        for i in range(num,n+1,num):
             change(i)
-    # 여자
     else:
         change(num)
-        for k in range(N//2):
-            if num + k > N or num - k < 1 : break
-            if switch[num + k] == switch[num - k]:
-                change(num + k)
-                change(num - k)
+        for j in range(n//2):
+            if num + j > n or num - j < 1 : break
+            if switch[num-j]==switch[num+j]:
+                change(num-j)
+                change(num+j)
             else:
                 break
-                
-for i in range(1, N+1):
-    print(switch[i], end = " ")
-    if i % 20 == 0 :
+
+
+for i in range(1, n+1):
+    print(switch[i], end=' ')
+    if i%20==0:
         print()
