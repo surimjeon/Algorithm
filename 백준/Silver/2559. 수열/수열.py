@@ -1,12 +1,11 @@
-import sys
+n,k=map(int,input().split()) #개수, k:연속적인 날짜 수
 
-n,k=map(int,sys.stdin.readline().split())
-lst=list(map(int,sys.stdin.readline().split()))
+lst=list(map(int,input().split()))
+hap=sum(lst[:k])
+hap_lst=[hap]
 
-first=sum(lst[:k])
-first_lst=[first]
 for i in range(n-k):
-    first=first-lst[i]+lst[i+k]
-    first_lst.append(first)
+    hap=hap-lst[i]+lst[i+k]
+    hap_lst.append(hap)
 
-print(max(first_lst))
+print(max(hap_lst))
