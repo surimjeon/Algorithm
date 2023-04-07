@@ -1,24 +1,16 @@
-TC=int(input())
-
-def fun(a):
-    stack = []
-    for i in a:
-        if i=='(':
-            stack.append('(')
+T=int(input())
+for t in range(T):
+    PS=input()
+    queue=[]
+    printing='YES'
+    for ps in PS:
+        if ps=='(':
+            queue.append(ps)
         else:
-            if len(stack)!=0:
-                stack.pop()
-            else:
-                return False
-
-    if len(stack)>0:
-        return False
-    else:
-        return True
-
-for tc in range(TC):
-    a=list(input())
-    if fun(a)==False:
-        print('NO')
-    else:
-        print('YES')
+            try:
+                queue.pop()
+            except:
+                printing='NO'
+    if queue:
+        printing='NO'
+    print(printing)
