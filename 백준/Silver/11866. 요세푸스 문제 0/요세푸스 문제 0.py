@@ -1,13 +1,15 @@
-from collections import deque
+n,k=map(int,input().split())
+circle=[i for i in range(1,n+1)]
 
-N, K=map(int, input().split())
-yose=deque([i+1 for i in range(N)])
+res=[]
+point=0
+while circle:
+    point=(point+(k-1))%len(circle) 
+    a=circle.pop(point)
+    res.append(a)
+
 print('<', end='')
-while yose:
-    for _ in range(K-1):
-        yose.append(yose.popleft())
-    print(f'{yose.popleft()}', end='')
-    if not yose:
-        print('>')
-        break
-    print(', ', end='')
+for i in range(n-1):
+    print(res[i], end=', ')
+print(res[-1], end='')
+print('>')
