@@ -11,7 +11,7 @@ public class Main {
 		int v = sc.nextInt();
 		
 		for (int i=0;i<n; i++) {
-			if (arr[i]==v) cnt+=1;
+			if (arr[i]==v) cnt++;
 		}
 		System.out.print(cnt);
 	}
