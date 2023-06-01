@@ -1,4 +1,5 @@
 
+
 import java.util.*;
 import java.io.*;
 
@@ -9,9 +10,9 @@ public class Main {
 		int n = Integer.parseInt(br.readLine());
 		
 		// 1일차를 포함했을 떄, 2일차를 포함했을 떄, 뒤에 나오는 것들 탐색...
-		int[] t = new int [n];
-		int[] p = new int [n];
-		int[] dp = new int[n+1]; //지금까지 계산할 값
+		int[] t = new int [n+15];
+		int[] p = new int [n+15];
+		int[] dp = new int[n+15]; //지금까지 계산할 값
 		
 		for (int i=0; i<n; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
@@ -21,16 +22,17 @@ public class Main {
 		
 		int mx = 0;
 		
-		for (int i=0; i<n; i++) {
+		for (int i=0; i<=n; i++) {
 			//다음 idx
 			int idx = i+t[i];
-			if (idx<=n) {
-				dp[idx]= Math.max(dp[idx], dp[i]+p[i]); }
-				//범위에 벗어나지 않으면, 원래 저장되어있는 dp와 이전에 누적한 값 중 큰 값을 집어넣는다
-				dp[i+1] = Math.max(dp[i+1], dp[i]);
-				//상담은 계속 이어지기 때문에, 이전값(dp[i])을 dp[i+1]에 대입한다.
+			dp[i]=Math.max(dp[i],mx); //dp[i]정의
+			
+			dp[idx]= Math.max(dp[idx], dp[i]+p[i]); 
+			//이전에 더한 값들과 현재 값 중 max값을 지정
+			mx = Math.max(mx, dp[i]);
+			//mx값 갱신
 		}
-		System.out.println(dp[n]);
+		System.out.println(mx);
 		
 	}
 }
