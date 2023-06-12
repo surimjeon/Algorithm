@@ -13,12 +13,12 @@ class Solution {
             }
             hash.put(tangerine[i], x);
         }
-        List<Integer> lst = new ArrayList<>(hash.keySet());
+        List<Integer> lst = new ArrayList<>(hash.values());
         
-        lst.sort((o1,o2)-> hash.get(o2).compareTo(hash.get(o1)));
+        Collections.sort(lst, Collections.reverseOrder());
         int sm =0;
         for (int j : lst) {
-            sm+=hash.get(j);
+            sm+=j;
             answer++;
             if (sm>=k)  break; //sm이 k보다 더 많아도 그거 하나만 담으면 되니까.. 
             
