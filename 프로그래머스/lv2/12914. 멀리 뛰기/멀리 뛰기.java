@@ -1,6 +1,6 @@
 class Solution {
     public long solution(int n) {
-        long[] memo = new long[2001]; //최대값
+        long[] memo = new long[n+2]; //최대값
         memo[1]=1;
         memo[2]=2;
         
