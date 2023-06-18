@@ -1,54 +1,51 @@
 
+
 import java.io.*;
 import java.util.*;
 
 public class Main {
-	static int [] arr;
-	static List<ArrayList<Integer>> ans;
-	static int k;
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		k = Integer.parseInt(br.readLine());
-		arr=new int [(int)Math.pow(2, k)-1];
-		//double형식으로 반환
-		
+		int k = Integer.parseInt(br.readLine());
+		Queue<Node> q = new LinkedList<>();
+		int num = (int)Math.pow(2, k)-1;
+		int [] arr = new int[num];
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		for (int i=0; i<arr.length; i++) {
-			arr[i]=Integer.parseInt(st.nextToken());
+		
+		for (int i=0; i<num; i++) {
+			 arr[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		ans = new ArrayList<>();
-		for (int i=0; i<k; i++) {
-			ans.add(new ArrayList<>());
-		}
-		//깊이에 맞게 리스트 생성
-		search(0, arr.length-1, 0);
+		q.add(new Node(0,num-1));
 		
-		for (int i=0; i<k; i++) {
-			for (int j : ans.get(i)) {
-				System.out.print(j+" ");
+		while (!q.isEmpty()) {
+			int qsize=q.size();
+			for (int i=0; i<qsize; i++) { //현재 들어있는 사이즈(계층의 수)만큼 
+				Node now = q.poll();
+				
+				int cen = (now.left + now.right)/2;
+				
+				System.out.print(arr[cen]+" ");
+				
+				if(now.left!=now.right) { //왼쪽과 오른쪽이 같지 않으면(=마지막 계층이면 add하지 않음)
+					q.add(new Node(now.left, cen-1));
+					q.add(new Node(cen+1, now.right));
+				}
 			}
 			System.out.println();
+			
 		}
-
+		
+		
 	}
-	public static void search(int start, int end, int depth) {
-		if (depth==k) {
-			return;
+	public static class Node {
+		int left;
+		int right;
+		
+		Node(int left, int right) { //변수값 저장
+			this.left=left;
+			this.right=right;
 		}
-		int cen = (start+end)/2; //이진트리의 중위순회
-		ans.get(depth).add(arr[cen]); 
-		//ArrayList로 되어있는 ans에서 해당 층에다가 노드중간값 넣기
-		
-		//왼쪽값 넣기, 
-		//depth는 현재 층에서 처리가 완료된 후 다시 함수가 호출될떄는 search에 depth+1이 전달되어 처리가 이뤄짐
-		search(start, cen-1, depth+1);
-		search(cen+1, end, depth+1);
-		
 	}
 }
-
-
-
-
