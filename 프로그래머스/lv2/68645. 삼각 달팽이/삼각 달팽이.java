@@ -4,23 +4,35 @@ class Solution {
         int [][] mapp = new int[n][n];
         int sum =(n*(n+1))/2;
         int idx = 1;
-        int x = -1;
+        int x =0;
         int y=0; 
-        
-        for(int i=0; i<n; i++) {
-            for(int j=i; j<n; j++) {
-                if(i%3==0){
-                    x++;
-                }
-                else if(i%3==1){
-                    y++;
-                }
-                else {
-                    x--;
-                    y--;
-                }
-                mapp[x][y]=idx++;
+        int turn =n;
+        while (idx<=sum) {
+            //아래
+            for (int i=0; i<turn; i++) {
+                mapp[x++][y]=idx++;
             }
+            x--;
+            turn--;
+            y++;
+            
+            // 오른쪽
+            for (int j=0; j<turn; j++) {
+                mapp[x][y++]=idx++;
+            }
+            y--; //열 안넘치게
+            turn--;
+            x--; //다음 차례 준비
+            y--;
+            
+            //위쪽
+            for (int j=0; j<turn; j++) {
+                mapp[x--][y--]=idx++;
+            }
+            x++;
+            turn--;
+            x++;
+            y++;
         }
         
         int n_idx = 0;
