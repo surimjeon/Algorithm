@@ -2,6 +2,8 @@ import java.util.*;
 
 class Solution {
     public String solution(String[] survey, int[] choices) {
+        String answer ="";
+        char[][] c = {{'R','T'},{'C','F'},{'J','M'},{'A','N'}};
         Map<Character, Integer> mapp = new HashMap<>(); 
         
         for (int i=0; i<survey.length; i++) {
@@ -14,11 +16,10 @@ class Solution {
                 mapp.put(right,mapp.getOrDefault(right,0)+choices[i]-4);
             }
         }
-        return new StringBuilder()
-            .append(mapp.getOrDefault('R',0) >= mapp.getOrDefault('T',0) ? 'R':'T')
-            .append(mapp.getOrDefault('C',0) >= mapp.getOrDefault('F',0) ? 'C':'F')
-            .append(mapp.getOrDefault('J',0) >= mapp.getOrDefault('M',0) ? 'J':'M')
-            .append(mapp.getOrDefault('A',0) >= mapp.getOrDefault('N',0) ? 'A':'N')
-            .toString();
+        for (int i=0; i<4; i++) {
+            answer+= (mapp.getOrDefault(c[i][0],0)>=mapp.getOrDefault(c[i][1],0) ? c[i][0] : c[i][1]);
+        }
+        
+        return answer;
     }
 }
