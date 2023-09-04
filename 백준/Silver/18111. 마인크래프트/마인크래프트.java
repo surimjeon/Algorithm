@@ -51,7 +51,7 @@ public class Main {
             }
             if (block<0) break; //그 케이스는 불가
             if (mntime>=time) {
-                mntime= time;
+                mntime= Math.min(time,mntime);
                 height = k;
             }
         }
