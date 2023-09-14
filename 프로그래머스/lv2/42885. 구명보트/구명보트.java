@@ -11,13 +11,10 @@ class Solution {
         
         while(start<=end) {
             if (people[end]+people[start]<=limit) {
-                answer++;
                 start++;
             }
-            else {
-                answer++;
-            }
             end--; 
+            answer++;
             
         }
         
