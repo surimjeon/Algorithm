@@ -2,26 +2,25 @@ import java.util.*;
 class Solution {
     public int solution(int k, int[] tangerine) {
         int answer = 0;
-        // k개를 고를 떄, 크기 종류가 최소가 되도록, 그 종류의 개수를 return하도록
-        // hash 사용해서 count를 할까? getordefault이고, cnt는 +1씩
-        HashMap<Integer, Integer> hash = new HashMap<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
         
         for (int i=0; i<tangerine.length; i++) {
-            int x = 1;
-            if (hash.containsKey(tangerine[i])) {
-                x = hash.get(tangerine[i])+1;
+            if (map.containsKey(tangerine[i])) {
+                map.put(tangerine[i], map.get(tangerine[i])+1);
             }
-            hash.put(tangerine[i], x);
+            else {
+                map.put(tangerine[i], 1);
+            }
         }
-        List<Integer> lst = new ArrayList<>(hash.values());
+        List<Integer> keys = new ArrayList<>(map.keySet());
         
-        Collections.sort(lst, Collections.reverseOrder());
-        int sm =0;
-        for (int j : lst) {
-            sm+=j;
+        Collections.sort(keys, (a1, a2)->(map.get(a2).compareTo(map.get(a1))));
+        
+        
+        for (int key : keys) {
+            if (k<=0) break;
             answer++;
-            if (sm>=k)  break; //sm이 k보다 더 많아도 그거 하나만 담으면 되니까.. 
-            
+            k-=map.get(key);
         }
         
         return answer;
