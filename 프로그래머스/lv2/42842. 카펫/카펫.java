@@ -1,24 +1,19 @@
+import java.util.*;
 class Solution {
     public int[] solution(int brown, int yellow) {
-        // 두개 더한 것을 모든 나눠지는 경우의 수를 찾고,
-        //그들 중에 가로 - 2 * 세로 -2 가 yellow와 같은 것.. 구하기
-        
-        // ArrayList<int[]> arr = new ArrayList<>();
+        int[] answer = new int[2];
         int total = brown+yellow;
-        int width = 0;
-        int height = 0;
+        //1 2 3 4 6 12
         
-        for (int i=1; i< total; i++){
-            if (total%i==0) {
-                int j = total/i;
-                if ((j-2)*(i-2)==yellow) {
-                    width=i;
-                    height=j;
-                }
+        ArrayList<Integer> lst = new ArrayList<>();
+        for(int i =1; i<=yellow; i++) {
+            if(yellow%i==0 && total%(i+2)==0) {
+                answer[1]=Math.min(i+2, total/(i+2));
+                answer[0]=Math.max(i+2, total/(i+2));
             }
         }
         
-        int[] answer = {width, height};
+        
         return answer;
     }
 }
