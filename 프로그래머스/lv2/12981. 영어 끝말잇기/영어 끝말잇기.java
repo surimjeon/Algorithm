@@ -1,32 +1,27 @@
 import java.util.*;
-
 class Solution {
-    public int[] solution(int n, String[] words) { //n은 사람 수, words는 배열
-        int[] answer= new int[2];
-        // arraylist로 이전단어를 비교해보고, 동일한 단어가 없는지 보는 용도
-        ArrayList<String> arr = new ArrayList<>();
-        arr.add(words[0]);
-        int idx =0;
+    public int[] solution(int n, String[] words) {
+        int[] answer=new int[2]; //번호, 차례 
+        //n명, 마지막문자로 시작하는 단어 말하기, 이전에 등장한 단어x
+        ArrayList<String> arr = new ArrayList<>(); 
+        String temp =words[0];
+        arr.add(temp);
         
         for (int i=1; i<words.length; i++) {
-            if (!arr.contains(words[i])) {
-                String pre = arr.get(idx);
-                if (words[i].charAt(0)!=pre.charAt(pre.length()-1)) {
-                    return fail(i,n);
-                }
-                idx++;
-                arr.add(words[i]);
+            if (temp.charAt(temp.length()-1)!=words[i].charAt(0)) {
+                answer = new int[]{(i%n)+1, (i/n)+1};
+                break;
             }
-            else {
-                return fail(i,n);
+            
+            if(arr.contains(words[i])) {
+                answer = new int[]{(i%n)+1, (i/n)+1};
+                break;
             }
+            arr.add(words[i]);
+            temp= words[i];
         }
-        return answer;
-    }
-    public static int[] fail(int i, int n) {
-        int [] answer = new int[2];
-        answer[0]= (i%n)+1;
-        answer[1]=(i/n)+1;
+        
+        
         return answer;
     }
 }
