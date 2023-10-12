@@ -1,0 +1,7 @@
+-- 입양간 동물 중 보호기간이 가장 길었던 동물 2마리 아이디, 이름 조회
+-- 보호기간이 긴순으로 조회
+SELECT B.ANIMAL_ID, B.NAME
+FROM ANIMAL_INS AS A JOIN ANIMAL_OUTS AS B ON A.ANIMAL_ID = B.ANIMAL_ID
+ORDER BY B.DATETIME - A.DATETIME DESC
+LIMIT 2;
+
