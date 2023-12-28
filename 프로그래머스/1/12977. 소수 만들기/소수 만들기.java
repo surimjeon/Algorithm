@@ -3,13 +3,11 @@
 class Solution {
     public int solution(int[] nums) {
         int answer = 0;
-        boolean[] prime = new boolean[3001];
         // 에라토스테네스 체 이용해서 소수 판별 (최대 3000까지)
-        chea(prime);
         for (int i=0; i<nums.length-2; i++) {
             for (int j=i+1; j<nums.length-1; j++) {
                 for (int k=j+1; k<nums.length; k++) {
-                    if (!prime[nums[i]+nums[j]+nums[k]]) {
+                    if (chea(nums[i]+nums[j]+nums[k])) {
                         answer++;
                     }
                 }
@@ -18,11 +16,16 @@ class Solution {
         
         return answer;
     }
-    public static void chea(boolean[] prime) {
-        for (int i=2; i*i<=3000; i++) {
-            for (int j=i; i*j<=3000; j++) {
-                prime[j*i]=true;
+    
+    public static boolean chea(int num) {
+        if (num<2) return false;
+        else {
+            for (int i=2; i*i<=num; i++) {
+                if (num%i==0) {
+                    return false;
+                }
             }
         }
+        return true;
     }
 }
