@@ -1,18 +1,23 @@
-// 약수개수보다 초과하면, 지정된 양(limit)만큼 무기를 만들어야함 => 
+// 약수 개수 = 공격력, 만약 제한수치를 넘어가면 정한 공격력을 따라야함
+// number이하 숫자의 모두 약수 구하기 -> 만약 제한수치 넘으면, 정한 공격력
 class Solution {
     public int solution(int number, int limit, int power) {
         int answer = 0;
-        //약수의 수 구하기
-        // limit넘어가면 power로 바뀌어야함
         for (int i=1; i<=number; i++) {
-            int cnt =0;
-            for (int j=1; j*j<=i; j++) {
-                if (j*j==i) cnt++;
-                else if (i%j==0) cnt+=2;
-            }
-            if (cnt>limit) answer+=power;
-            else answer+=cnt;
+            int cnt = div(i); //그 숫자의 약수개수 구하기
+            if (cnt > limit) cnt = power;
+            answer+=cnt;
         }
+        
         return answer;
+    }
+    public static int div(int num) {
+        int cnt =0;
+        if (num==1) return 1;
+        for (int i=1; i*i<=num; i++) {
+            if (num==i*i) cnt++;
+            else if (num%i==0) cnt+=2;
+        }
+        return cnt;
     }
 }
