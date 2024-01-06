@@ -1,21 +1,22 @@
+// 첫문자만 대문자
 class Solution {
     public String solution(String s) {
         String answer = "";
-        String[] temp = s.split(" "); //split는 공백 여러개를 자를 수 없다
+        String[] str = s.split(" ");
+        s = s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
         
-        for (int i=0; i<temp.length; i++){
-            if (temp[i].length()==0) answer+=" ";
-            else {
-                answer+=temp[i].substring(0,1).toUpperCase()+temp[i].substring(1, temp[i].length()).toLowerCase();
-            answer+=" ";
+        for (int i=1; i<s.length(); i++) {
+            if (s.substring(i-1, i).equals(" ")) {
+                s = s.substring(0, i) + s.substring(i,i+1).toUpperCase() + s.substring(i+1); 
             }
         }
         
-        if (s.substring(s.length()-1, s.length()).equals(" ")) {
-                return answer;
-            }
-        return answer.substring(0, s.length());
+//         for (int i=0; i<str.length; i++) {
+//             String temp = str[i].substring(0,1).toUpperCase()+str[i].substring(1).toLowerCase();
+//             answer+=temp;
+            
+//         }
         
-        
+        return s;
     }
 }
