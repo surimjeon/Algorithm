@@ -1,5 +1,7 @@
--- 들어올 떄는 중성화 x->나갈때는 중성화된 아이들 중성화 거친 동물은 : Spayed Female, Neutered Male / 중성화 X:  Intact
-SELECT A.ANIMAL_ID, A.ANIMAL_TYPE, A.NAME
-FROM ANIMAL_INS AS A JOIN ANIMAL_OUTS AS B ON A.ANIMAL_ID=B.ANIMAL_ID
-WHERE A.SEX_UPON_INTAKE LIKE '%Intact%' AND (B.SEX_UPON_OUTCOME LIKE '%Spayed%' OR B.SEX_UPON_OUTCOME LIKE '%Neutered%')
-ORDER BY A.ANIMAL_ID
+-- 들어올 당시에는 중성화 x , 나갈떄는 중성화 (spayed female, neutered male) 
+-- 아이디순으로 조회
+SELECT B.ANIMAL_ID, B.ANIMAL_TYPE, B.NAME
+FROM ANIMAL_INS AS A JOIN ANIMAL_OUTS AS B ON A.ANIMAL_ID = B.ANIMAL_ID
+WHERE A.SEX_UPON_INTAKE LIKE '%Intact%'
+AND (B.SEX_UPON_OUTCOME LIKE "%Spayed%" OR B.SEX_UPON_OUTCOME LIKE "%Neutered%")
+ORDER BY B.ANIMAL_ID
